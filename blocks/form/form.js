@@ -40,7 +40,6 @@ export default function decorate(block) {
     messageDiv.textContent = message;
     messageDiv.className = `form-message ${type}`;
     messageDiv.style.display = 'block';
-    
     if (type === 'success') {
       setTimeout(() => {
         messageDiv.style.display = 'none';
@@ -61,9 +60,7 @@ export default function decorate(block) {
           resolve();
         }, 2000);
       });
-      
       const isSuccess = Math.random() < 0.7;
-      
       if (isSuccess) {
         showMessage('表单提交成功！感谢您的信息。', 'success');
         form.reset();
