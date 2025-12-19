@@ -35,6 +35,19 @@ export default function decorate(block) {
   const form = block.querySelector('#contact-form');
   const messageDiv = block.querySelector('#form-message');
 
+  // 显示消息函数
+  function showMessage(message, type) {
+    messageDiv.textContent = message;
+    messageDiv.className = `form-message ${type}`;
+    messageDiv.style.display = 'block';
+    
+    if (type === 'success') {
+      setTimeout(() => {
+        messageDiv.style.display = 'none';
+      }, 3000);
+    }
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -43,7 +56,11 @@ export default function decorate(block) {
       submitButton.textContent = '提交中...';
       submitButton.disabled = true;
 
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 2000);
+      });
       
       const isSuccess = Math.random() < 0.7;
       
@@ -67,16 +84,4 @@ export default function decorate(block) {
       submitButton.disabled = false;
     }
   });
-
-  function showMessage(message, type) {
-    messageDiv.textContent = message;
-    messageDiv.className = `form-message ${type}`;
-    messageDiv.style.display = 'block';
-    
-    if (type === 'success') {
-      setTimeout(() => {
-        messageDiv.style.display = 'none';
-      }, 3000);
-    }
-  }
 }
