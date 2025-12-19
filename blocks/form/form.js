@@ -1,5 +1,4 @@
 export default function decorate(block) {
-  // 创建表单HTML结构
   block.innerHTML = `
     <form id="contact-form">
       <div class="form-group">
@@ -33,68 +32,47 @@ export default function decorate(block) {
     </form>
   `;
 
-
   const form = block.querySelector('#contact-form');
   const messageDiv = block.querySelector('#form-message');
 
-
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
-
-    const formData = new FormData(form);
-    const data = {
-      name: formData.get('name'),
-      phone: formData.get('phone'),
-      email: formData.get('email'),
-      consent: formData.get('consent') === 'on',
-      timestamp: new Date().toISOString()
-    };
 
     try {
-
       const submitButton = form.querySelector('button[type="submit"]');
       submitButton.textContent = '提交中...';
       submitButton.disabled = true;
 
-    
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       
       const isSuccess = Math.random() < 0.7;
       
       if (isSuccess) {
-        
         showMessage('表单提交成功！感谢您的信息。', 'success');
         form.reset();
       } else {
-        
         const errors = [
           '网络连接超时，请稍后重试。',
           '服务器繁忙，请稍后再试。',
-          '提交频率过高，请稍后重试。'
+          '提交频率过高，请稍后重试。',
         ];
         const randomError = errors[Math.floor(Math.random() * errors.length)];
         showMessage(randomError, 'error');
       }
     } catch (error) {
-      
       showMessage('网络错误，请检查连接后重试。', 'error');
     } finally {
-      
       const submitButton = form.querySelector('button[type="submit"]');
       submitButton.textContent = '提交';
       submitButton.disabled = false;
     }
   });
 
- 
   function showMessage(message, type) {
     messageDiv.textContent = message;
     messageDiv.className = `form-message ${type}`;
     messageDiv.style.display = 'block';
     
-  
     if (type === 'success') {
       setTimeout(() => {
         messageDiv.style.display = 'none';
