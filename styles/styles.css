@@ -12,8 +12,8 @@
 
 :root {
   /* colors */
-  --background-color: rgb(132 154 111);
-  --light-color: rgb(132 154 111)
+  --background-color: rgb(255 255 255);
+  --light-color: rgb(255 255 255)
   --dark-color: #505050;
   --text-color: #131313;
   --link-color: #3b63fb;
